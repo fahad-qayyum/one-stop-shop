@@ -9,7 +9,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {ItemsListComponent} from './items-list/items-list.component';
 import {ItemNewComponent} from './item-new/item-new.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
 

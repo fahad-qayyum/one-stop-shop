@@ -48,7 +48,6 @@ export class ItemNewComponent implements OnInit {
   }
 
   checkForControlErrors(control: string) {
-    // console.log(this.newItemForm.get(control).errors);
     return this.newItemForm.get(control).errors && this.newItemForm.get(control).dirty;
   }
 }
