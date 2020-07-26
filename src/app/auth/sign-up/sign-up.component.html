@@ -1,0 +1,43 @@
+<form (ngSubmit)="onSubmitForm()" [formGroup]="signUpForm">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput matNativeControl type="text">
+    <small *ngIf="checkForControlErrors('name')"
+           class="form-text text-danger">
+      Please enter a name
+    </small>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input formControlName="email" matInput matNativeControl type="email">
+    <small *ngIf="checkForControlErrors('email')"
+           class="form-text text-danger">
+      Please enter a valid email
+    </small>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input formControlName="password" matInput matNativeControl type="password">
+    <small *ngIf="checkForControlErrors('password')"
+           class="form-text text-danger">
+      Please enter a valid password
+    </small>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Re-Enter Password</mat-label>
+    <input formControlName="reEnteredPassword" matInput matNativeControl type="password">
+    <small *ngIf="checkForControlErrors('reEnteredPassword')"
+           class="form-text text-danger">
+      Password doesn't match
+    </small>
+  </mat-form-field>
+
+  <div>
+    <button (click)="onClear()" color="warn" mat-raised-button type="button">Clear</button>
+    <button [disabled]="signUpForm.invalid" color="primary" mat-raised-button type="button">Submit</button>
+  </div>
+</form>
