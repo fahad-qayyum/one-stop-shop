@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <form (ngSubmit)="onSubmitForm()" [formGroup]="signUpForm">
+      <div class="form-group">
+        <input class="form-control" formControlName="name" placeholder="name" type="text">
+        <small *ngIf="checkForControlErrors('name')"
+               class="form-text text-danger">
+          Please enter a name
+        </small>
+      </div>
+      <div class="form-group">
+        <input class="form-control" formControlName="email" placeholder="Your email address" type="email">
+        <small *ngIf="checkForControlErrors('email')"
+               class="form-text text-danger">
+          Please enter a valid email
+        </small>
+      </div>
+      <div class="form-group">
+        <input class="form-control" formControlName="password" placeholder="Create a password" type="password">
+        <small *ngIf="checkForControlErrors('password')"
+               class="form-text text-danger">
+          Please enter a valid password
+        </small>
+      </div>
+      <div class="form-group">
+        <input class="form-control" formControlName="reEnteredPassword" placeholder="Re-enter password"
+               type="password">
+        <small *ngIf="checkForControlErrors('reEnteredPassword')"
+               class="form-text text-danger">
+          Password doesn't match
+        </small>
+      </div>
+      <button (click)="onClear()" class="btn btn-danger" type="button">Clear</button>
+      <button [disabled]="signUpForm.invalid" class="btn btn-success" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

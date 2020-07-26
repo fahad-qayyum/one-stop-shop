@@ -1,0 +1,18 @@
+<div class="container" *ngIf="item else itemNotFound;">
+  <div class="row">
+    <div class="col-md-6">
+      <img alt="" class="img-fluid" src="{{item.imageSrc}}">
+    </div>
+    <div class="col-md-6">
+      <h2>{{item.title}}</h2><span *ngIf="item.offeredBy" class="text-muted text-info">{{item.offeredBy}}</span>
+      <h5>{{item.subTitle}}</h5>
+      <h6>Price : ${{item.price}}</h6>
+      <hr>
+      <h3>Description:</h3>
+      <p>{{item.description}}</p>
+    </div>
+  </div>
+</div>
+<ng-template #itemNotFound>
+  OOOOPPSSS ! Item with this ID wasn't found
+</ng-template>

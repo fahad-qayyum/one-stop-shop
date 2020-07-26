@@ -1,0 +1,17 @@
+<mat-card class="c-card">
+  <mat-card-header>
+    <div class="c-header-image" mat-card-avatar></div>
+    <mat-card-title>{{item.title}}</mat-card-title>
+    <mat-card-subtitle *ngIf="item.subTitle">{{item.subTitle}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{item.imageSrc}}">
+  <mat-card-content>
+    <p>
+      {{item.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>

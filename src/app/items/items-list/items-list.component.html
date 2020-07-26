@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let item of itemList" class="col-sm-6 col-xs-12 col-md-4">
+      <a [routerLink]="[item.id]" class="c-cursor-pointer">
+        <app-item-card [item]="item"></app-item-card>
+      </a>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
