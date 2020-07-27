@@ -1,8 +1,21 @@
+<div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{errorMessage}}
+  <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div *ngIf="!errorMessage && successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+  {{successMessage}}
+  <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
 <form (ngSubmit)="onSubmitForm()" [formGroup]="signUpForm">
 
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
-    <input formControlName="name" matInput matNativeControl type="text">
+    <input formControlName="name" matInput type="text">
     <small *ngIf="checkForControlErrors('name')"
            class="form-text text-danger">
       Please enter a name
@@ -11,7 +24,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
-    <input formControlName="email" matInput matNativeControl type="email">
+    <input formControlName="email" matInput type="email">
     <small *ngIf="checkForControlErrors('email')"
            class="form-text text-danger">
       Please enter a valid email
@@ -20,7 +33,10 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Password</mat-label>
-    <input formControlName="password" matInput matNativeControl type="password">
+    <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput>
+    <button (click)="hide = !hide" mat-icon-button matSuffix type="button">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
     <small *ngIf="checkForControlErrors('password')"
            class="form-text text-danger">
       Please enter a valid password
@@ -29,7 +45,10 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Re-Enter Password</mat-label>
-    <input formControlName="reEnteredPassword" matInput matNativeControl type="password">
+    <input [type]="hide ? 'password' : 'text'" formControlName="reEnteredPassword" matInput>
+    <button (click)="hide = !hide" mat-icon-button matSuffix type="button">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
     <small *ngIf="checkForControlErrors('reEnteredPassword')"
            class="form-text text-danger">
       Password doesn't match
@@ -38,6 +57,6 @@
 
   <div>
     <button (click)="onClear()" color="warn" mat-raised-button type="button">Clear</button>
-    <button [disabled]="signUpForm.invalid" color="primary" mat-raised-button type="button">Submit</button>
+    <button [disabled]="signUpForm.invalid" color="primary" mat-raised-button type="submit">Submit</button>
   </div>
 </form>

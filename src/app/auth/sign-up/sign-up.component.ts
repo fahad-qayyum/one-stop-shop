@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -8,30 +9,44 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class SignUpComponent implements OnInit {
 
+  errorMessage: string = null;
   signUpForm: FormGroup;
+  hide = true;
+  successMessage: string = null;
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}')]),
+      // 'password': new FormControl(null, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}')]),
+      'password': new FormControl(null, [Validators.required]),
       'reEnteredPassword': new FormControl(null, Validators.required)
     })
   }
 
   onClear() {
+    console.log("Form Cleared");
     this.signUpForm.reset();
   }
 
   checkForControlErrors(control: string) {
-    return this.signUpForm.get(control).errors && this.signUpForm.get(control).dirty;
+    return this.signUpForm.get(control).errors && this.signUpForm.get(control).touched;
   }
 
   onSubmitForm() {
-    this.onClear();
+    const email = this.signUpForm.get('email').value;
+    const password = this.signUpForm.get('password').value;
+    this.authService.signUp(email, password).subscribe(onSuccess => {
+      console.log(onSuccess);
+      if (onSuccess.idToken)
+        this.successMessage = 'Hurray !! Account created, Sign in now please';
+      this.authService.isLoginMode = true;
+    }, error => {
+      this.errorMessage = error;
+    });
   }
 
 }

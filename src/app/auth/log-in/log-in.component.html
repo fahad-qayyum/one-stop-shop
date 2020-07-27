@@ -1,0 +1,35 @@
+<div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{errorMessage}}
+  <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form (ngSubmit)="onSubmitForm()" [formGroup]="logInForm">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input formControlName="email" matInput type="email">
+    <small *ngIf="checkForControlErrors('email')"
+           class="form-text text-danger">
+      Please enter a valid email
+    </small>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput>
+    <button (click)="hide = !hide" mat-icon-button matSuffix type="button">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <small *ngIf="checkForControlErrors('password')"
+           class="form-text text-danger">
+      Please enter a valid password
+    </small>
+  </mat-form-field>
+
+  <div>
+    <button (click)="onClear()" color="warn" mat-raised-button type="button">Clear</button>
+    <button [disabled]="logInForm.invalid" color="primary" mat-raised-button type="submit">Submit</button>
+  </div>
+
+</form>
