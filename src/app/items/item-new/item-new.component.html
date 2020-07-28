@@ -1,61 +1,86 @@
-<div class="container">
-  <div class="row">
-    <form (ngSubmit)="onSubmitForm()" [formGroup]="newItemForm">
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input class="form-control" formControlName="title" id="title" type="text">
-        <small *ngIf="checkForControlErrors('title')"
-               class="form-text text-danger">
-          Please enter the Title
-        </small>
-      </div>
-      <div class="form-group">
-        <label for="sub-title">Subtitle</label>
-        <input class="form-control" formControlName="subTitle" id="sub-title" type="text">
-        <small *ngIf="checkForControlErrors('subTitle')"
-               class="form-text text-danger">
-          Please enter the Subtitle
-        </small>
-      </div>
-      <div class="form-group">
-        <label for="price">Price</label>
-        <input class="form-control" formControlName="price" id="price" type="number">
-        <small *ngIf="checkForControlErrors('price')"
-               class="form-text text-danger">
-          Please enter a valid price
-        </small>
-      </div>
-      <div class="form-group">
-        <label for="imageSrc">Image Path</label>
-        <input class="form-control" formControlName="imageSrc" id="imageSrc" type="text">
-        <small *ngIf="checkForControlErrors('imageSrc')"
-               class="form-text text-danger">
-          Please enter an Image Path
-        </small>
-        <img [src]="newItemForm.get('imageSrc').value" alt="" class="img-fluid">
-      </div>
-      <div class="form-group">
-        <label for="offeredBy">Offered By</label>
-        <input class="form-control" formControlName="offeredBy" id="offeredBy" type="text">
-        <small *ngIf="checkForControlErrors('offeredBy')"
-               class="form-text text-danger">
-          Please enter your brand name
-        </small>
-      </div>
-      <div class="form-group">
-        <label for="offeredBy">Description</label>
-        <textarea class="form-control" cols="30" formControlName="description" id="Description"
-                  placeholder="Min Length 10 Characters"
-                  rows="10"></textarea>
-        <small *ngIf="checkForControlErrors('description')"
-               class="form-text text-danger">
-          Please enter valid description
-        </small>
-      </div>
-      <button (click)="onClear()" class="btn btn-danger" type="button">Clear</button>
-      <button [disabled]="newItemForm.invalid" class="btn btn-success" type="submit">Submit</button>
-    </form>
+<form (ngSubmit)="onSubmitForm()" [formGroup]="newItemForm">
+  <div class="offset-md-3 offset-2 col-xs-8 col-md-6">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input formControlName="title" matInput type="text">
+      <small *ngIf="checkForControlErrors('title')"
+             class="form-text text-danger">
+        Please enter the Title
+      </small>
+    </mat-form-field>
+
+
   </div>
-</div>
+  <div class="offset-md-3 offset-2 col-xs-8 col-md-6">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Subtitle</mat-label>
+      <input formControlName="subTitle" matInput type="text">
+      <small *ngIf="checkForControlErrors('subTitle')"
+             class="form-text text-danger">
+        Please enter the Subtitle
+      </small>
+    </mat-form-field>
+
+  </div>
+  <div class="offset-md-3 offset-2 col-xs-8 col-md-6">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input formControlName="price" matInput type="number">
+      <span matPrefix>$&nbsp;</span>
+      <small *ngIf="checkForControlErrors('price')"
+             class="form-text text-danger">
+        Please enter a valid price
+      </small>
+    </mat-form-field>
+
+  </div>
+  <div class="offset-md-3 offset-2 col-xs-8 col-md-6">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Image Path</mat-label>
+      <input formControlName="imageSrc" matInput type="text">
+      <small *ngIf="checkForControlErrors('imageSrc')"
+             class="form-text text-danger">
+        Please enter an Image Path
+      </small>
+    </mat-form-field>
+    <img [src]="newItemForm.get('imageSrc').value" alt="" class="img-fluid">
+
+  </div>
+  <div class="offset-md-3 offset-2 col-xs-8 col-md-6">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Offered By</mat-label>
+      <input formControlName="offeredBy" matInput type="text">
+      <small *ngIf="checkForControlErrors('offeredBy')"
+             class="form-text text-danger">
+        Please enter your brand name
+      </small>
+    </mat-form-field>
+  </div>
+  <div class="offset-md-3 offset-2 col-xs-8 col-md-6">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea #des cols="30" formControlName="description" matInput placeholder="Min Length 10 Characters"
+                type="text"></textarea>
+      <mat-hint align="end">{{des.value?.length || 0}}{{des.value?.length < 10 ? '/10' : ''}}</mat-hint>
+      <small *ngIf="checkForControlErrors('description')"
+             class="form-text text-danger">
+        Please enter valid description
+      </small>
+    </mat-form-field>
+  </div>
+
+  <div class="offset-md-3 offset-2 col-xs-8 col-md-6">
+    <button (click)="onClear()" color="warn" mat-raised-button type="button">Clear</button>
+    <button [disabled]="newItemForm.invalid" color="primary" mat-raised-button type="submit">Submit</button>
+  </div>
+
+
+</form>
 <br><br>
 

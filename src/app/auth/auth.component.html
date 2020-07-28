@@ -1,18 +1,38 @@
 <div class="container">
   <div class="row p-5">
     <div class="offset-md-3 offset-2 col-xs-8 col-md-6">
-      <app-sign-up *ngIf="!isLoginMode"></app-sign-up>
-      <app-log-in *ngIf="isLoginMode"></app-log-in>
-      <br>
-      <mat-divider></mat-divider>
-      <br>
-      <p>{{isLoginMode ? 'Don\'t have an account yet? ' : 'Already have an account? ' }}
-        <a (click)="onLoginClick()"
-           matTooltip="Log in if you have an account with us"
-           style="cursor: pointer; color: steelblue;">
-          {{ isLoginMode ? 'Sign Up' : 'Log in' }}
-        </a>
-      </p>
+
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{errorMessage}}
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="!errorMessage && successMessage" class="alert alert-success alert-dismissible fade show"
+           role="alert">
+        {{successMessage}}
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <div *ngIf="!isLoading">
+        <app-sign-up *ngIf="!isLoginMode"></app-sign-up>
+        <app-log-in *ngIf="isLoginMode"></app-log-in>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <p>{{isLoginMode ? 'Don\'t have an account yet? ' : 'Already have an account? ' }}
+          <a (click)="onLoginClick()"
+             matTooltip="Log in if you have an account with us"
+             style="cursor: pointer; color: steelblue;">
+            {{ isLoginMode ? 'Sign Up' : 'Log in' }}
+          </a>
+        </p>
+      </div>
+
     </div>
   </div>
 </div>

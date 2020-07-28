@@ -11,7 +11,6 @@ export class LogInComponent implements OnInit {
 
   logInForm: FormGroup;
   hide = true;
-  errorMessage: string = null;
 
   constructor(private authService: AuthService) {
   }
@@ -36,11 +35,7 @@ export class LogInComponent implements OnInit {
   onSubmitForm() {
     const email = this.logInForm.get('email').value;
     const password = this.logInForm.get('password').value;
-    this.authService.logIn(email, password).subscribe(onSuccess => {
-      console.log(onSuccess);
-    }, error => {
-      this.errorMessage = error
-    });
+    this.authService.logIn(email, password);
   }
 
 }

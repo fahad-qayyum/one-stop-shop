@@ -7,10 +7,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDividerModule} from "@angular/material/divider";
 import {HttpClientModule} from "@angular/common/http";
 import {MatIconModule} from "@angular/material/icon";
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [LoadingSpinnerComponent],
   imports: [
     FormsModule,
     HttpClientModule,
@@ -24,6 +25,7 @@ import {MatIconModule} from "@angular/material/icon";
     MatIconModule
   ],
   exports: [
+    LoadingSpinnerComponent,
     FormsModule,
     MatIconModule,
     HttpClientModule,

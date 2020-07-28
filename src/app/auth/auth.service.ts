@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, throwError} from "rxjs";
+import {BehaviorSubject, Subject, throwError} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {catchError} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 export interface AuthResponseData {
   idToken: string;
@@ -18,25 +19,60 @@ export interface AuthResponseData {
 })
 export class AuthService {
 
-  isLoginMode : boolean = false;
-  constructor(private httpClient: HttpClient) {
+  isLoadingSubject = new BehaviorSubject<boolean>(false);
+  successMessage = new Subject<string>();
+  errorMessage = new Subject<string>();
+  isloginMode: boolean;
+  isLoginModeSubject = new Subject<boolean>();
+
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
-  signUp(email: string, password: string): Observable<any> {
+  toggleLoginMode() {
+    this.isloginMode = !this.isloginMode;
+    this.isLoginModeSubject.next(this.isloginMode);
+  }
+
+  signUp(email: string, password: string) {
+    this.isLoadingSubject.next(true);
     return this.httpClient.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.APIKey, {
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(catchError(this.handleError)
-    );
+    }).pipe(catchError(this.handleError)).subscribe(onSuccess => {
+      console.log(onSuccess);
+      if (onSuccess.idToken) {
+        this.successMessage.next('Hurray !! Account created, Sign in now please');
+        this.errorMessage.next(null);
+        this.isLoadingSubject.next(false);
+        this.toggleLoginMode();
+      }
+    }, error => {
+      this.successMessage.next(null);
+      this.isLoadingSubject.next(false);
+      this.errorMessage.next(error.toString());
+    });
   }
 
-  logIn(email: string, password: string): Observable<any> {
+  logIn(email: string, password: string) {
+    this.isLoadingSubject.next(true);
     return this.httpClient.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.APIKey, {
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(catchError(this.handleError));
+    }).pipe(catchError(this.handleError)).subscribe(onSuccess => {
+      console.log(onSuccess);
+      this.successMessage.next('Login Successful! Redirecting Now')
+      this.errorMessage.next(null);
+      setTimeout(() => {
+        this.router.navigate(['/items']);
+        this.isLoadingSubject.next(false);
+      }, 2000);
+    }, error => {
+      this.isLoadingSubject.next(false);
+      this.successMessage.next(null);
+      this.errorMessage.next(error.toString());
+    });
   }
 
 

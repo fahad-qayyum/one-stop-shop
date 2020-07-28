@@ -28,6 +28,7 @@ export class ItemNewComponent implements OnInit {
   }
 
   onSubmitForm() {
+    console.log('item submitted');
     const item: Item = {
       id: this.itemService.generateUUID(),
       title: this.newItemForm.get('title').value,
@@ -48,6 +49,6 @@ export class ItemNewComponent implements OnInit {
   }
 
   checkForControlErrors(control: string) {
-    return this.newItemForm.get(control).errors && this.newItemForm.get(control).dirty;
+    return this.newItemForm.get(control).errors && this.newItemForm.get(control).touched;
   }
 }

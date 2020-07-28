@@ -6,20 +6,26 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NavbarComponent} from './navbar/navbar.component';
 import {ItemsModule} from "./items/items.module";
-import {RouterModule} from "@angular/router";
+import {SignUpComponent} from './auth/sign-up/sign-up.component';
+import {AuthComponent} from './auth/auth.component';
+import {LogInComponent} from './auth/log-in/log-in.component';
+import {SharedModule} from "./shared/shared.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    SignUpComponent,
+    AuthComponent,
+    LogInComponent,
   ],
   imports: [
+    SharedModule,
     ItemsModule,
     BrowserModule,
     AppRoutingModule,
-    RouterModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

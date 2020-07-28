@@ -9,10 +9,8 @@ import {AuthService} from "../auth.service";
 })
 export class SignUpComponent implements OnInit {
 
-  errorMessage: string = null;
   signUpForm: FormGroup;
   hide = true;
-  successMessage: string = null;
 
   constructor(private authService: AuthService) {
   }
@@ -39,14 +37,7 @@ export class SignUpComponent implements OnInit {
   onSubmitForm() {
     const email = this.signUpForm.get('email').value;
     const password = this.signUpForm.get('password').value;
-    this.authService.signUp(email, password).subscribe(onSuccess => {
-      console.log(onSuccess);
-      if (onSuccess.idToken)
-        this.successMessage = 'Hurray !! Account created, Sign in now please';
-      this.authService.isLoginMode = true;
-    }, error => {
-      this.errorMessage = error;
-    });
+    this.authService.signUp(email, password);
   }
 
 }
