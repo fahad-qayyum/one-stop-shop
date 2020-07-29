@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Item} from "./item.model";
+import {Item} from "../../../items/item.model";
 import {UUID} from "angular2-uuid";
-import {ItemDatabaseService} from "./item-database.service";
+import {ItemDatabaseService} from "./database/item-database.service";
 import {Subject} from "rxjs";
 
 @Injectable({

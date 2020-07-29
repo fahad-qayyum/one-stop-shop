@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Subject, throwError} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../../environments/environment";
 import {catchError} from "rxjs/operators";
 import {Router} from "@angular/router";
 

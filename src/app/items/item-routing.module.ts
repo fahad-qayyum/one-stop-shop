@@ -2,15 +2,15 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ItemDetailsComponent} from "./item-details/item-details.component";
 import {RouterModule, Routes} from "@angular/router";
-import {ItemsComponent} from "./items.component";
-import {ItemsListComponent} from "./items-list/items-list.component";
+import {ItemComponent} from "./item.component";
 import {ItemNewComponent} from "./item-new/item-new.component";
+import {ItemListComponent} from "./item-list/item-list.component";
 
 
 const itemRoutes: Routes = [
   {
-    path: 'items', component: ItemsComponent, children: [
-      {path: '', pathMatch: 'full', component: ItemsListComponent},
+    path: 'items', component: ItemComponent, children: [
+      {path: '', pathMatch: 'full', component: ItemListComponent},
       {path: 'new', component: ItemNewComponent},
       {path: ':id', component: ItemDetailsComponent},
     ]
@@ -27,5 +27,5 @@ const itemRoutes: Routes = [
     RouterModule
   ]
 })
-export class ItemsRoutingModule {
+export class ItemRoutingModule {
 }

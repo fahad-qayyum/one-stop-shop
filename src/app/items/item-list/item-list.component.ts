@@ -1,15 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ItemService} from "../item.service";
+import {ItemService} from "../../shared/services/item/item.service";
 import {Item} from "../item.model";
-import {ItemDatabaseService} from "../item-database.service";
+import {ItemDatabaseService} from "../../shared/services/item/database/item-database.service";
 import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-items-list',
-  templateUrl: './items-list.component.html',
-  styleUrls: ['./items-list.component.scss']
+  templateUrl: './item-list.component.html',
+  styleUrls: ['./item-list.component.scss']
 })
-export class ItemsListComponent implements OnInit, OnDestroy {
+export class ItemListComponent implements OnInit, OnDestroy {
 
   public itemList: Item[];
   private itemListSubscription: Subscription;

@@ -1,12 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ItemCardComponent} from "./items-list/item-card/item-card.component";
+import {ItemCardComponent} from "./item-list/item-card/item-card.component";
 import {ItemDetailsComponent} from "./item-details/item-details.component";
-import {ItemsComponent} from "./items.component";
-import {ItemsRoutingModule} from "./items-routing.module";
-import {ItemsListComponent} from './items-list/items-list.component';
+import {ItemComponent} from "./item.component";
+import {ItemRoutingModule} from "./item-routing.module";
+import {ItemListComponent} from './item-list/item-list.component';
 import {ItemNewComponent} from './item-new/item-new.component';
-import {HttpClientModule} from "@angular/common/http";
 import {SharedModule} from "../shared/shared.module";
 
 
@@ -14,15 +13,15 @@ import {SharedModule} from "../shared/shared.module";
   declarations: [
     ItemCardComponent,
     ItemDetailsComponent,
-    ItemsComponent,
-    ItemsListComponent,
+    ItemComponent,
+    ItemListComponent,
     ItemNewComponent,
   ],
   imports: [
     SharedModule,
     CommonModule,
-    ItemsRoutingModule,
+    ItemRoutingModule,
   ]
 })
-export class ItemsModule {
+export class ItemModule {
 }

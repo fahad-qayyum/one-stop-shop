@@ -7,11 +7,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDividerModule} from "@angular/material/divider";
 import {HttpClientModule} from "@angular/common/http";
 import {MatIconModule} from "@angular/material/icon";
-import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.component';
+import {NavbarComponent} from "./navbar/navbar.component";
+import {AppRoutingModule} from "../app-routing.module";
 
 
 @NgModule({
-  declarations: [LoadingSpinnerComponent],
+  declarations: [LoadingSpinnerComponent, NavbarComponent],
   imports: [
     FormsModule,
     HttpClientModule,
@@ -22,10 +24,13 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     MatDividerModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    AppRoutingModule
   ],
   exports: [
+    NavbarComponent,
     LoadingSpinnerComponent,
+    AppRoutingModule,
     FormsModule,
     MatIconModule,
     HttpClientModule,
